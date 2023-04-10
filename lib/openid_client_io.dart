@@ -113,7 +113,7 @@ class Authenticator {
   static Future<HttpServer> _startServer(
       int port, String? htmlPage, String? redirectMessage) {
     return _requestServers[port] ??=
-        (HttpServer.bind('http://127.0.0.1', port)
+        (HttpServer.bind(InternetAddress.loopbackIPv4, port)
           ..then((requestServer) async {
             log('Server started at port $port');
             await for (var request in requestServer) {
