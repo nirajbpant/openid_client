@@ -115,7 +115,7 @@ class Authenticator {
     return _requestServers[port] ??=
         (HttpServer.bind(InternetAddress.loopbackIPv4, port)
           ..then((requestServer) async {
-            log('Server started at port $requestServer:$port/');
+            log('Server started at port ${requestServer.address}:$port/');
             await for (var request in requestServer) {
               request.response.statusCode = 200;
               if (redirectMessage != null) {
