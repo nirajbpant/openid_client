@@ -71,7 +71,7 @@ class Authenticator {
             ? Flow.authorizationCodeWithPKCE(client, prompt: prompt)
             : Flow.authorizationCode(client, prompt: prompt)
           ..scopes.addAll(scopes)
-          ..redirectUri = redirectUri ?? Uri.parse('http://localhost:$port/');
+          ..redirectUri = redirectUri ?? Uri.parse('http://127.0.0.1:$port/');
 
   /// Starts the authentication flow.
   ///
@@ -113,7 +113,7 @@ class Authenticator {
   static Future<HttpServer> _startServer(
       int port, String? htmlPage, String? redirectMessage) {
     return _requestServers[port] ??=
-        (HttpServer.bind(InternetAddress.anyIPv4, port)
+        (HttpServer.bind('http://127.0.0.1', port)
           ..then((requestServer) async {
             log('Server started at port $port');
             await for (var request in requestServer) {
